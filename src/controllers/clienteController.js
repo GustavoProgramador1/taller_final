@@ -7,8 +7,8 @@ import {
   buscarCliente,
 } from "../models/clienteModel.js";
 
-import { buscarByCliente as buscarByClienteinformacionCrediticia } from "../models/informacionCrediticiaModel.js";
-import { buscarByCliente as buscarByClientecreditoModel } from "../models/creditoModel.js";
+import { buscarByCliente as buscarByClienteinformacionCrediticia, buscarByClienteAll as buscarByClienteAllinformacionCrediticia } from "../models/informacionCrediticiaModel.js";
+import { buscarByCliente as buscarByClientecreditoModel, buscarByClienteAll as buscarByClienteAllcreditoModel } from "../models/creditoModel.js";
 
 // Crear cliente
 const crearCliente = async (req, res) => {
@@ -111,15 +111,15 @@ const obtenerCreditosCantidad = async (req, res) => {
   try {
     const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
 
-    const resultados = await buscarByClienteinformacionCrediticia(cliente.id);
+    const resultados = await buscarByClienteAllcreditoModel(cliente.id);
 
     res.status(200).json({
       ...cliente.dataValues,
-      cantidad_creditos: resultados.total_creditos,
+      cantidad_creditos: resultados.length,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al obtener el puntaje" });
+    res.status(500).json({ error: "Error al obtener el CreditosCantidad" });
   }
 };
 
