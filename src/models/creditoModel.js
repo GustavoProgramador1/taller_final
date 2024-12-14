@@ -59,18 +59,23 @@ export const buscarByCliente = async (cliente_id) => {
 };
 
 // Buscar cliente por tipo de documento y número
-export const buscarByClienteAll = async (cliente_id) => {
+export const buscarByClienteAll = async (cliente_id, tipo) => {
     try {
-        // Buscar en la base de datos un cliente que coincida con el tipo y número de documento
+        let whereConditions = {};
+
+        if (cliente_id) {
+            whereConditions.cliente_id = cliente_id;
+        }
+        if (tipo) {
+            whereConditions.tipo = tipo;
+        }
+
         const cliente = await Credito.findAll({
-            where: {
-                cliente_id: cliente_id
-            }
+            where: whereConditions
         });
 
-        // Lanzar error si el cliente no existe
-        if (!cliente) {
-            throw new Error("cliente no encontrado");
+        if (cliente.length === 0) {
+            throw new Error("Cliente no encontrado");
         }
 
         return cliente;

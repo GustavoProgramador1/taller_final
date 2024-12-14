@@ -5,6 +5,7 @@ import {
   updateCredito,
   destroyCredito,
   buscarByCliente,
+  buscarByClienteAll,
 } from "../models/creditoModel.js";
 
 // Crear credito
@@ -84,6 +85,23 @@ const obtenerCreditoPorCliente = async (req, res) => {
   }
 };
 
+const obtenerTarjetasCantidad = async (req, res) => {
+  try {
+    const resultados = await buscarByClienteAll(null, "Tarjeta de crédito");
+
+    if (resultados.length === 0) {
+      return res.status(404).json({ error: "Cliente no encontrado" });
+    }
+
+    res.status(200).json({
+      total_tarjetas_credito: resultados.length,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el TarjetasCantidad" });
+  }
+};
+
 export {
   crearCredito,
   obtenerCreditos,
@@ -91,4 +109,5 @@ export {
   actualizarCredito,
   eliminarCredito,
   obtenerCreditoPorCliente,
+  obtenerTarjetasCantidad,
 };
