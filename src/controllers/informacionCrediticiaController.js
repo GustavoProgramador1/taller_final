@@ -4,6 +4,7 @@ import {
   findInformacionCrediticiaById,
   updateInformacionCrediticia,
   destroyInformacionCrediticia,
+  buscarByCliente,
 } from "../models/informacionCrediticiaModel.js";
 
 // Crear informacionCrediticia
@@ -66,10 +67,28 @@ const eliminarInformacionCrediticia = async (req, res) => {
   }
 };
 
+const obtenerInformacionCrediticiaPorCliente = async (req, res) => {
+  const { cliente_id } = req.params;
+
+  try {
+    const resultados = await buscarByCliente(cliente_id);
+
+    if (resultados.length === 0) {
+      return res.status(404).json({ error: "Cliente no encontrado" });
+    }
+
+    res.status(200).json(resultados);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el cliente" });
+  }
+};
+
 export {
   crearInformacionCrediticia,
   obtenerInformacionCrediticias,
   obtenerInformacionCrediticiaPorId,
   actualizarInformacionCrediticia,
   eliminarInformacionCrediticia,
+  obtenerInformacionCrediticiaPorCliente,
 };
