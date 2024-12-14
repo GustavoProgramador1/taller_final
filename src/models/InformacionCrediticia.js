@@ -33,7 +33,7 @@ const InformacionCrediticia = sequelize.define(
     },
   },
   {
-    tableName: "InformacionCrediticia",
+    tableName: "informacionCrediticia",
     timestamps: false,
   }
 );
