@@ -1,5 +1,5 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/db.js';
 
 const ReporteNegativo = sequelize.define(
   "ReporteNegativo",
@@ -42,6 +42,4 @@ const ReporteNegativo = sequelize.define(
   }
 );
 
-module.exports = {
-  ReporteNegativo,
-};
+export default ReporteNegativo;
