@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS CreditInfoDB;
 USE CreditInfoDB;
 
-CREATE TABLE usuarios (
+CREATE TABLE Usuarios (
   id INT AUTO_INCREMENT PRIMARY KEY,       
   nombre VARCHAR(255) NOT NULL,            
   correo VARCHAR(255) NOT NULL UNIQUE,     
@@ -25,6 +25,7 @@ CREATE TABLE Cliente (
 
 -- Crear tabla de información crediticia
 CREATE TABLE InformacionCrediticia (
+    id INT AUTO_INCREMENT PRIMARY KEY,       
     cliente_id INT,
     score_credito INT NOT NULL,
     total_creditos INT NOT NULL,
@@ -60,7 +61,12 @@ CREATE TABLE ReporteNegativo (
     FOREIGN KEY (cliente_id) REFERENCES Cliente(id)
 );
 
+
 -- Insertar datos
+INSERT INTO Usuarios (id, nombre, correo, login, clave, createdAt, updatedAt)
+VALUES
+(1, 'admin', 'admin@admin.com', 'admin', '$2a$12$qxJpp8pmtm2CQUeh1H64z.1xh9CyS/2J/AzMYDQpRLjFUQZ3G4P16', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
 INSERT INTO Cliente (id, nombre, tipo_documento, numero_documento, fecha_nacimiento, estado_civil, nivel_educativo)
 VALUES
 (1, 'Carlos Alberto Pérez', 'CC', '1012345678', '1985-07-15', 'Soltero', 'Profesional'),
@@ -68,12 +74,12 @@ VALUES
 (3, 'Luis Eduardo Martínez', 'CC', '1034567890', '1982-01-12', 'Divorciado', 'Secundaria'),
 (4, 'María Fernanda Rojas', 'CC', '1045678901', '1995-05-30', 'Soltera', 'Profesional');
 
-INSERT INTO InformacionCrediticia (cliente_id, score_credito, total_creditos, creditos_al_dia, creditos_en_mora, dias_mora_promedio)
+INSERT INTO InformacionCrediticia (id, cliente_id, score_credito, total_creditos, creditos_al_dia, creditos_en_mora, dias_mora_promedio)
 VALUES
-(1, 720, 5, 4, 1, 30),
-(2, 800, 3, 3, 0, 0),
-(3, 650, 4, 3, 1, 45),
-(4, 770, 2, 2, 0, 0);
+(1, 1, 720, 5, 4, 1, 30),
+(2, 2, 800, 3, 3, 0, 0),
+(3, 3, 650, 4, 3, 1, 45),
+(4, 4, 770, 2, 2, 0, 0);
 
 INSERT INTO Credito (cliente_id, tipo, entidad, monto_original, saldo_actual, limite, numero, estado)
 VALUES

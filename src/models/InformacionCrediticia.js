@@ -4,6 +4,10 @@ import sequelize from '../config/db.js';
 const InformacionCrediticia = sequelize.define(
   "InformacionCrediticia",
   {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+    },
     cliente_id: {
       type: DataTypes.INTEGER,
       references: {
