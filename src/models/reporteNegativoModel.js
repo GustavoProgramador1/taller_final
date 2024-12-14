@@ -62,7 +62,7 @@ export const buscarByCliente = async (cliente_id) => {
 export const buscarByClienteAll = async (cliente_id) => {
     try {
         // Buscar en la base de datos un cliente que coincida con el tipo y número de documento
-        const cliente = await Credito.findAll({
+        const cliente = await ReporteNegativo.findAll({
             where: {
                 cliente_id: cliente_id
             }

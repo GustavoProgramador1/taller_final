@@ -9,6 +9,7 @@ import {
 
 import { buscarByCliente as buscarByClienteinformacionCrediticia, buscarByClienteAll as buscarByClienteAllinformacionCrediticia } from "../models/informacionCrediticiaModel.js";
 import { buscarByCliente as buscarByClientecreditoModel, buscarByClienteAll as buscarByClienteAllcreditoModel } from "../models/creditoModel.js";
+import { buscarByCliente as buscarByClientereporteNegativoModel, buscarByClienteAll as buscarByClienteAllreporteNegativoModel } from "../models/reporteNegativoModel.js";
 
 // Crear cliente
 const crearCliente = async (req, res) => {
@@ -137,7 +138,43 @@ const obtenerDeuda = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al obtener el CreditosCantidad" });
+    res.status(500).json({ error: "Error al obtener el Deuda" });
+  }
+};
+
+const obtenerReporteNegativoCantidad = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
+
+    const resultados = await buscarByClienteAllreporteNegativoModel(cliente.id);
+
+    res.status(200).json({
+      ...cliente.dataValues,
+      reportes_negativos: resultados.length,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el ReporteNegativoCantidad" });
+  }
+};
+
+const obtenerReporteNegativoMonto = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
+
+    const resultados = await buscarByClienteAllreporteNegativoModel(cliente.id);
+
+    res.status(200).json({
+      ...cliente.dataValues,
+      monto_reportado: resultados.reduce((total, reporte) => total + reporte.monto, 0),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el ReporteNegativoMonto" });
   }
 };
 
@@ -151,4 +188,6 @@ export {
   obtenerPuntaje,
   obtenerCreditosCantidad,
   obtenerDeuda,
+  obtenerReporteNegativoCantidad,
+  obtenerReporteNegativoMonto,
 };

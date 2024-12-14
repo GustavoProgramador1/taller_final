@@ -9,6 +9,8 @@ import {
   obtenerPuntaje,
   obtenerCreditosCantidad,
   obtenerDeuda,
+  obtenerReporteNegativoCantidad,
+  obtenerReporteNegativoMonto,
 } from "../controllers/clienteController.js";
 import { protegerRuta } from "../middleware/authMiddleware.js";
 
@@ -38,6 +40,16 @@ router.get(
   "/Deuda/:tipoDocumento/:numeroDocumento",
   protegerRuta,
   obtenerDeuda
+);
+router.get(
+  "/ReporteNegativoCantidad/:tipoDocumento/:numeroDocumento",
+  protegerRuta,
+  obtenerReporteNegativoCantidad
+);
+router.get(
+  "/ReporteNegativoMonto/:tipoDocumento/:numeroDocumento",
+  protegerRuta,
+  obtenerReporteNegativoMonto
 );
 
 export default router;
