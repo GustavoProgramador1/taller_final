@@ -6,6 +6,7 @@ import {
   actualizarCliente,
   eliminarCliente,
   obtenerClientePorDocumento,
+  obtenerPuntaje,
 } from "../controllers/clienteController.js";
 import { protegerRuta } from "../middleware/authMiddleware.js";
 
@@ -20,6 +21,11 @@ router.get(
   "/:tipoDocumento/:numeroDocumento",
   protegerRuta,
   obtenerClientePorDocumento
+);
+router.get(
+  "/puntaje/:tipoDocumento/:numeroDocumento",
+  protegerRuta,
+  obtenerPuntaje
 );
 
 export default router;

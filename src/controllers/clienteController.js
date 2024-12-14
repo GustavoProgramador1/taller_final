@@ -7,6 +7,8 @@ import {
   buscarCliente,
 } from "../models/clienteModel.js";
 
+import { buscarByCliente } from "../models/informacionCrediticiaModel.js";
+
 // Crear cliente
 const crearCliente = async (req, res) => {
   try {
@@ -84,6 +86,25 @@ const obtenerClientePorDocumento = async (req, res) => {
   }
 };
 
+const obtenerPuntaje = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    console.log(tipoDocumento, numeroDocumento);
+    const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
+    console.log(cliente);
+    const resultados = await buscarByCliente(cliente.id);
+
+    res.status(200).json({
+      ...cliente.dataValues,
+      puntaje_datacredito: resultados.score_credito,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el puntaje" });
+  }
+};
+
 export {
   crearCliente,
   obtenerClientes,
@@ -91,4 +112,5 @@ export {
   actualizarCliente,
   eliminarCliente,
   obtenerClientePorDocumento,
+  obtenerPuntaje,
 };
