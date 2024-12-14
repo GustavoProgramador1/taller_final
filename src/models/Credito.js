@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/db.js';
+import Cliente from './Cliente.js';
 
 const Credito = sequelize.define(
   "Credito",
