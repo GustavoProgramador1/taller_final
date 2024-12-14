@@ -1,0 +1,100 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "datacredito",
+    "collectionId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+    "dateExported": "2024-12-10T21:16:59.166Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "6da57b25-7687-45b8-aa79-7e60d4af4122",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "monto-negativo",
+            "url": "http://localhost:3000/usuarios/cc/1012345678/reportes-negativos/monto",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-12-10T21:16:07.337Z",
+            "modified": "2024-12-10T21:16:07.337Z",
+            "headers": []
+        },
+        {
+            "_id": "ce7069d2-772a-4714-a46e-61acb51df817",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "cant-tarjetas-credito",
+            "url": "http://localhost:3000/creditos/tarjetas/cantidad",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-12-10T21:16:17.318Z",
+            "modified": "2024-12-10T21:16:17.318Z",
+            "headers": []
+        },
+        {
+            "_id": "fae36a3e-691f-4d1f-a311-f67df93e8ea7",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "cant-reportes-negativos",
+            "url": "http://localhost:3000/usuarios/cc/1012345678/reportes-negativos/cantidad",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-12-10T21:16:22.793Z",
+            "modified": "2024-12-10T21:16:22.793Z",
+            "headers": []
+        },
+        {
+            "_id": "821549c4-590b-4b68-9839-06d532d403aa",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "deuda-total",
+            "url": "http://localhost:3000/usuarios/cc/1012345678/deuda",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-12-10T21:16:27.931Z",
+            "modified": "2024-12-10T21:16:27.931Z",
+            "headers": []
+        },
+        {
+            "_id": "86558d05-79aa-4adf-bee4-ae47f5034003",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "cantidad-creditos",
+            "url": "http://localhost:3000/usuarios/cc/1012345678/creditos/cantidad",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-12-10T21:16:33.938Z",
+            "modified": "2024-12-10T21:16:33.938Z",
+            "headers": []
+        },
+        {
+            "_id": "0b2aaea8-4d38-452e-ba9b-fcddc3f567ca",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "puntaje",
+            "url": "http://localhost:3000/usuarios/cc/1012345678/puntaje",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-12-10T21:16:41.146Z",
+            "modified": "2024-12-10T21:16:41.146Z",
+            "headers": []
+        },
+        {
+            "_id": "21ac2311-28af-4c14-9786-da2425e28d1f",
+            "colId": "9e1219b1-efa4-4811-bcdc-c86c08c84376",
+            "containerId": "",
+            "name": "addReporteNegativo",
+            "url": "http://localhost:3000/usuarios/reportes-negativos",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-12-10T21:16:47.551Z",
+            "modified": "2024-12-10T21:16:47.551Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"tipoDocumento\": \"CC\",\n  \"documento\": \"1012345678\",\n  \"fecha\": \"2024-12-31\",\n  \"entidad\": \"Tienda de Electrodomésticos LMN\",\n  \"monto\": 260000,\n  \"estado\": \"En mora\",\n  \"comentario\": \"Pago atrasado por más de 2 días.\"\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "FO3WASQnqfFKXR_xugAdBQPURtCyHm-WpabF53_thKzTxvdwMweuIZHfUPBJFuH_CCK4O_kL_Qeef7nrNU379Q"
+}
