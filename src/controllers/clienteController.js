@@ -123,6 +123,24 @@ const obtenerCreditosCantidad = async (req, res) => {
   }
 };
 
+const obtenerDeuda = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
+
+    const resultados = await buscarByClienteAllcreditoModel(cliente.id);
+
+    res.status(200).json({
+      ...cliente.dataValues,
+      deuda_total: resultados.reduce((total, credito) => total + credito.saldo_actual, 0),
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el CreditosCantidad" });
+  }
+};
+
 export {
   crearCliente,
   obtenerClientes,
@@ -132,4 +150,5 @@ export {
   obtenerClientePorDocumento,
   obtenerPuntaje,
   obtenerCreditosCantidad,
+  obtenerDeuda,
 };

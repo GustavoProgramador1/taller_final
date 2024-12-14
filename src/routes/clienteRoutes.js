@@ -8,6 +8,7 @@ import {
   obtenerClientePorDocumento,
   obtenerPuntaje,
   obtenerCreditosCantidad,
+  obtenerDeuda,
 } from "../controllers/clienteController.js";
 import { protegerRuta } from "../middleware/authMiddleware.js";
 
@@ -32,6 +33,11 @@ router.get(
   "/CreditosCantidad/:tipoDocumento/:numeroDocumento",
   protegerRuta,
   obtenerCreditosCantidad
+);
+router.get(
+  "/Deuda/:tipoDocumento/:numeroDocumento",
+  protegerRuta,
+  obtenerDeuda
 );
 
 export default router;
