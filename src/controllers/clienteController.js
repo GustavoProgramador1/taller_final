@@ -4,6 +4,7 @@ import {
   findClienteById,
   updateCliente,
   destroyCliente,
+  buscarCliente,
 } from "../models/clienteModel.js";
 
 // Crear cliente
@@ -66,10 +67,28 @@ const eliminarCliente = async (req, res) => {
   }
 };
 
+const obtenerClientePorDocumento = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    const resultados = await buscarCliente(tipoDocumento, numeroDocumento);
+
+    if (resultados.length === 0) {
+      return res.status(404).json({ error: "Cliente no encontrado" });
+    }
+
+    res.status(200).json(resultados);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el cliente" });
+  }
+};
+
 export {
   crearCliente,
   obtenerClientes,
   obtenerClientePorId,
   actualizarCliente,
   eliminarCliente,
+  obtenerClientePorDocumento,
 };
