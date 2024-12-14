@@ -7,7 +7,8 @@ import {
   buscarCliente,
 } from "../models/clienteModel.js";
 
-import { buscarByCliente } from "../models/informacionCrediticiaModel.js";
+import { buscarByCliente as buscarByClienteinformacionCrediticia } from "../models/informacionCrediticiaModel.js";
+import { buscarByCliente as buscarByClientecreditoModel } from "../models/creditoModel.js";
 
 // Crear cliente
 const crearCliente = async (req, res) => {
@@ -90,14 +91,31 @@ const obtenerPuntaje = async (req, res) => {
   const { tipoDocumento, numeroDocumento } = req.params;
 
   try {
-    console.log(tipoDocumento, numeroDocumento);
     const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
-    console.log(cliente);
-    const resultados = await buscarByCliente(cliente.id);
+
+    const resultados = await buscarByClienteinformacionCrediticia(cliente.id);
 
     res.status(200).json({
       ...cliente.dataValues,
       puntaje_datacredito: resultados.score_credito,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al obtener el puntaje" });
+  }
+};
+
+const obtenerCreditosCantidad = async (req, res) => {
+  const { tipoDocumento, numeroDocumento } = req.params;
+
+  try {
+    const cliente = await buscarCliente(tipoDocumento, numeroDocumento);
+
+    const resultados = await buscarByClienteinformacionCrediticia(cliente.id);
+
+    res.status(200).json({
+      ...cliente.dataValues,
+      cantidad_creditos: resultados.total_creditos,
     });
   } catch (error) {
     console.error(error);
@@ -113,4 +131,5 @@ export {
   eliminarCliente,
   obtenerClientePorDocumento,
   obtenerPuntaje,
+  obtenerCreditosCantidad,
 };
