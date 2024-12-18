@@ -89,6 +89,38 @@
         <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mt-10">
             tarjetas
         </h1>
+        <textarea id="total_tarjetas_credito" class="w-full h-32 border p-2 mt-6" readonly></textarea>
+
+        <script>
+            async function tarjetasTotales () {
+                const token = localStorage.getItem('token') ?? "";
+
+                try {
+                    const response = await fetch(`http://localhost:3000/api/credito/Tarjetas/Cantidad`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Credenciales inválidas');
+                    }
+
+                    const { total_tarjetas_credito } = await response.json();
+                    console.log(total_tarjetas_credito);
+
+                    document.getElementById('total_tarjetas_credito').value = `Cantidad tarjetas en el sistema: ${total_tarjetas_credito}`;
+
+
+
+                } catch (error) {
+                    document.getElementById('result').innerText = error.message;
+                }
+            };
+            window.onload = tarjetasTotales;
+        </script>
     </main>
 </body>
 </html>
