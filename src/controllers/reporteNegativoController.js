@@ -10,6 +10,10 @@ import {
 // Crear reporteNegativo
 const crearReporteNegativo = async (req, res) => {
   try {
+    req.body.cliente_id=parseInt(req.body.cliente_id);
+    req.body.estado='En mora';
+    req.body.fecha=new Date(Date.now());
+    
     const resultado = await createReporteNegativo(req.body);
     res
       .status(201)
