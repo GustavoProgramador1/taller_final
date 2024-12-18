@@ -126,9 +126,7 @@
                             console.log(deuda_total)
 
                             // Mostrar el resultado
-                            document.getElementById('result').innerText = `Deuda Total: ${deuda_total}`;
-
-
+                            document.getElementById('result').innerText = `Deuda Total: $${deuda_total.toLocaleString()}`;
 
                         } catch (error) {
                             document.getElementById('result').innerText = error.message;

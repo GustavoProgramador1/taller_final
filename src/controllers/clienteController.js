@@ -116,7 +116,7 @@ const obtenerCreditosCantidad = async (req, res) => {
 
     res.status(200).json({
       ...cliente.dataValues,
-      cantidad_creditos: resultados.length,
+      cantidad_creditos: resultados.filter((credito) => credito.dataValues.estado === 'Activo').length,
     });
   } catch (error) {
     console.error(error);
@@ -134,7 +134,7 @@ const obtenerDeuda = async (req, res) => {
 
     res.status(200).json({
       ...cliente.dataValues,
-      deuda_total: resultados.reduce((total, credito) => total + credito.saldo_actual, 0),
+      deuda_total: resultados.reduce((total, credito) => total + parseInt(credito.dataValues.saldo_actual), 0),
     });
   } catch (error) {
     console.error(error);
