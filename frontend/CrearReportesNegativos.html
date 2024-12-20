@@ -84,72 +84,87 @@
 
                 <!-- Formulario de consulta -->
                 <form id="reportesNegativosForm">
+                    <!-- Campo para la entidad -->
                     <div class="mb-4">
-                        <label for="tipo-documento"
-                            class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
-                            Tipo de Documento
+                        <label for="entidad" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
+                            Entidad
                         </label>
-                        <select id="tipo-documento" name="tipo-documento"
-                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <option value="CC">Cédula de Ciudadanía (CC)</option>
-                            <option value="CE">Cédula de Extranjería (CE)</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="numero-documento"
-                            class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
-                            Número de Documento
-                        </label>
-                        <input type="text" id="numero-documento" name="numero-documento"
-                            placeholder="Ingrese su número de documento"
+                        <input type="text" id="entidad" name="entidad" placeholder="Ingrese el nombre de la entidad"
                             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             required>
                     </div>
 
+                    <!-- Campo para el monto -->
+                    <div class="mb-4">
+                        <label for="monto" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
+                            Monto
+                        </label>
+                        <input type="number" id="monto" name="monto" step="0.01" placeholder="Ingrese el monto"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            required>
+                    </div>
+
+                    <!-- Campo para comentarios -->
+                    <div class="mb-4">
+                        <label for="comentario" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
+                            Comentario
+                        </label>
+                        <textarea id="comentario" name="comentario" placeholder="Ingrese un comentario"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            rows="4" required></textarea>
+                    </div>
+
+                    <!-- Botón para enviar el formulario -->
                     <div class="flex items-center justify-between">
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Reportes Negativos del Cliente
+                            Enviar Reporte Negativo
                         </button>
                     </div>
                 </form>
 
+                <!-- Resultado del formulario -->
                 <textarea id="result" class="w-full h-32 border p-2 mt-6" readonly></textarea>
+
                 <script>
                     document.getElementById('reportesNegativosForm').addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        const tipoDocumento = document.getElementById('tipo-documento').value;
-                        const numeroDocumento = document.getElementById('numero-documento').value;
+
+                        // Obtener los valores de los campos del formulario
+                        const entidad = document.getElementById('entidad').value;
+                        const monto = document.getElementById('monto').value;
+                        const comentario = document.getElementById('comentario').value;
 
                         const token = localStorage.getItem('token') ?? "";
+                        const cliente_id = localStorage.getItem('id_cliente') ?? "";
 
                         try {
-                            const response = await fetch(`http://localhost:3000/api/clientes/ReporteNegativoCantidad/${tipoDocumento}/${numeroDocumento}`, {
-                                method: 'GET',
+                            const response = await fetch(`http://localhost:3000/api/reporteNegativo`, {
+                                method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
                                     'Authorization': `Bearer ${token}`
                                 },
+                                body: JSON.stringify({
+                                    cliente_id,
+                                    entidad,
+                                    monto,
+                                    comentario
+                                })
                             });
 
                             if (!response.ok) {
-                                throw new Error('Credenciales inválidas');
+                                throw new Error('Error al enviar el reporte negativo');
                             }
 
-                            const { id, reportes_negativos } = await response.json();
+                            const data = await response.json();
 
-                            localStorage.setItem('id_cliente', id);
-
-                            document.getElementById('result').value = `Reportes Negativos: ${reportes_negativos}`;
-
-
+                            document.getElementById('result').value = `Reporte creado correctamente: ${JSON.stringify(data)}`;
 
                         } catch (error) {
-                            document.getElementById('result').innerText = error.message;
+                            document.getElementById('result').value = error.message;
                         }
                     });
-
                 </script>
             </div>
         </main>
