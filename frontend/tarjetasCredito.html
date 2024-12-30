@@ -97,8 +97,7 @@
 
                     <div class="col-start-2 w-full p-8 mx-auto space-y-8 text-center bg-blue-700 rounded-lg">
 
-                        <h2 class="text-5xl font-bold text-white uppercase" total_tarjetas_credito>
-                            0
+                        <h2 class="text-5xl font-bold text-white uppercase" id="total_tarjetas_credito">
                         </h2>
 
                         <button
@@ -130,9 +129,7 @@
                     const { total_tarjetas_credito } = await response.json();
                     console.log(total_tarjetas_credito);
 
-                    document.getElementById('total_tarjetas_credito').value = `Cantidad tarjetas en el sistema: ${total_tarjetas_credito}`;
-
-
+                    document.getElementById('total_tarjetas_credito').innerText = `Cantidad tarjetas en el sistema: ${total_tarjetas_credito}`;
 
                 } catch (error) {
                     document.getElementById('result').innerText = error.message;
