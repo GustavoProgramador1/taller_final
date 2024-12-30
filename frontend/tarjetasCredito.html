@@ -18,7 +18,7 @@
 
         <div class="flex flex-col justify-between flex-1 mt-6">
             <nav>
-                <a class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 rounded-md"
+                <a class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 rounded-md"
                     href="consultarPuntaje.html">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd"
@@ -30,7 +30,7 @@
                     <span class="mx-4 font-medium">Consultar Puntaje </span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md hover:text-gray-700"
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-200 transition-colors duration-300 transform rounded-md hover:text-gray-700"
                     href="creditosActivos.html">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                         <path
@@ -43,7 +43,7 @@
                     <span class="mx-4 font-medium">Créditos Activos</span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md hover:text-gray-700"
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-200 transition-colors duration-300 transform rounded-md hover:text-gray-700"
                     href="deudasTotales.html">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd"
@@ -54,7 +54,7 @@
                     <span class="mx-4 font-medium">Deudas Totales</span>
                 </a>
 
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md hover:text-gray-700"
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 hover:bg-gray-200 transition-colors duration-300 transform rounded-md hover:text-gray-700"
                     href="reportesNegativos.html">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                         <path fill-rule="evenodd"
@@ -66,9 +66,7 @@
                     <span class="mx-4 font-medium">Reportes Negativos</span>
                 </a>
 
-
-
-                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform rounded-md hover:text-gray-700"
+                <a class="flex items-center px-4 py-2 mt-5 text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors duration-300 transform rounded-md hover:text-gray-700"
                     href="tarjetasCredito.html">
 
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
@@ -81,18 +79,39 @@
                 </a>
 
             </nav>
-
         </div>
     </aside>
 
     <main class="flex flex-col items-center bg-gray-100 h-screen">
-        <h1 class="text-3xl md:text-5xl font-bold text-gray-800 mt-10">
-            tarjetas
-        </h1>
-        <textarea id="total_tarjetas_credito" class="w-full h-32 border p-2 mt-6" readonly></textarea>
+     
+        <div class="bg-white dark:bg-gray-400 my-auto ms-32">
+            <div class="container px-6 py-8 mx-auto">
+                <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl">
+                    Tarjetas</h1>
 
+                <p class="max-w-2xl mx-auto mt-4 text-center text-gray-700 xl:mt-6">
+                    Aquí se presenta el numero de tarjetas que hay en todo el sistema.
+                </p>
+
+                <div class="grid grid-cols-3 gap-8  xl:mt-12 xl:gap-12 md:grid-cols-2 lg:grid-cols-3">
+
+                    <div class="col-start-2 w-full p-8 mx-auto space-y-8 text-center bg-blue-700 rounded-lg">
+
+                        <h2 class="text-5xl font-bold text-white uppercase" total_tarjetas_credito>
+                            0
+                        </h2>
+
+                        <button
+                            class="w-full px-4 py-2 mt-10 tracking-wide text-blue-500 capitalize transition-colors duration-300 transform bg-white rounded-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:ring focus:ring-gray-200 focus:ring-opacity-80">
+                            Consultar de nuevo
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <script>
-            async function tarjetasTotales () {
+            async function tarjetasTotales() {
                 const token = localStorage.getItem('token') ?? "";
 
                 try {
@@ -123,4 +142,5 @@
         </script>
     </main>
 </body>
+
 </html>
